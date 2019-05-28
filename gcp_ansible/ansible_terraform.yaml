@@ -7,3 +7,52 @@
   tasks:
     - name: PREVENT RUN WITHOUT TAGS
       fail: msg="You must run this playbook with tags! [present|absent]"
+
+- name: PROVISION GCP INFRASTRUCTURE USING TERRAFORM
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  tags: present
+
+  tasks:
+    - name: PROVISION GCP INFRASTRUCTURE USING TERRAFORM
+      terraform:
+        project_path: "{{ playbook_dir }}/gcp"
+        state: present
+        force_init: yes
+        workspace: "{{ remote_workspace }}"
+        variables:
+          gcp_id: "{{ gcp_project_id }}"
+          gcp_credential: "{{ gcp_cred_path }}"
+        backend_config:
+          organization: "{{remote_organization}}"
+          token: "{{remote_token}}"
+      register: output
+
+    - debug:
+        msg: "{{ output }}"
+
+
+- name: TEARDOWN GCP INFRASTRUCTURE USING TERRAFORM
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  tags: absent
+
+  tasks:
+    - name: TEARDOWN GCP INFRASTRUCTURE USING TERRAFORM
+      terraform:
+        project_path: "{{ playbook_dir }}/gcp"
+        state: absent
+        force_init: yes
+        workspace: "{{ remote_workspace }}"
+        variables:
+          gcp_id: "{{ gcp_project_id }}"
+          gcp_credential: "{{ gcp_cred_path }}"
+        backend_config:
+          organization: "{{remote_organization}}"
+          token: "{{remote_token}}"
+      register: output
+
+    - debug:
+        msg: "{{ output }}"
