@@ -22,8 +22,13 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 }
-
 resource "google_compute_network" "vpc_network" {
   name                    = "terransible-network"
   auto_create_subnetworks = "true"
+}
+
+terraform {
+  backend "s3" {
+    ##Partial Configuration##
+  }
 }

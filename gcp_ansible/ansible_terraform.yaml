@@ -20,13 +20,15 @@
         project_path: "{{ playbook_dir }}/gcp"
         state: present
         force_init: yes
-        workspace: "{{ remote_workspace }}"
         variables:
           gcp_id: "{{ gcp_project_id }}"
           gcp_credential: "{{ gcp_cred_path }}"
         backend_config:
-          organization: "{{remote_organization}}"
-          token: "{{remote_token}}"
+          access_key: "{{ aws_access_key }}"
+          secret_key: "{{ aws_secret_key }}"
+          bucket: "{{ aws_bucket }}"
+          key: "{{aws_key}}"
+          region: "{{ aws_region }}"
       register: output
 
     - debug:
@@ -45,13 +47,15 @@
         project_path: "{{ playbook_dir }}/gcp"
         state: absent
         force_init: yes
-        workspace: "{{ remote_workspace }}"
         variables:
           gcp_id: "{{ gcp_project_id }}"
           gcp_credential: "{{ gcp_cred_path }}"
         backend_config:
-          organization: "{{remote_organization}}"
-          token: "{{remote_token}}"
+          access_key: "{{ aws_access_key }}"
+          secret_key: "{{ aws_secret_key }}"
+          bucket: "{{ aws_bucket }}"
+          key: "{{aws_key}}"
+          region: "{{ aws_region }}"
       register: output
 
     - debug:
