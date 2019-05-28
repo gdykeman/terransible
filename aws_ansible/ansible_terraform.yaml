@@ -20,13 +20,15 @@
         project_path: "{{ playbook_dir }}/aws"
         state: present
         force_init: yes
-        workspace: "{{ remote_workspace}}"
         variables:
           aws_access_key: "{{ aws_access_key }}"
           aws_secret_key: "{{ aws_secret_key }}"
         backend_config:
-          organization: "{{remote_organization}}"
-          token: "{{remote_token}}"
+          access_key: "{{ aws_access_key }}"
+          secret_key: "{{ aws_secret_key }}"
+          bucket: "{{ aws_bucket }}"
+          key: "{{aws_key}}"
+          region: "{{ aws_region }}"
       register: output
 
     - debug:
@@ -44,13 +46,15 @@
         project_path: "{{ playbook_dir }}/aws"
         state: absent
         force_init: yes
-        workspace: "{{ remote_workspace}}"
         variables:
           aws_access_key: "{{ aws_access_key }}"
           aws_secret_key: "{{ aws_secret_key }}"
         backend_config:
-          organization: "{{remote_organization}}"
-          token: "{{remote_token}}"
+          access_key: "{{ aws_access_key }}"
+          secret_key: "{{ aws_secret_key }}"
+          bucket: "{{ aws_bucket }}"
+          key: "{{aws_key}}"
+          region: "{{ aws_region }}"
       register: output
 
     - debug:
