@@ -1,0 +1,9 @@
+---
+- name: PREVENT RUN WITHOUT TAGS
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: PREVENT RUN WITHOUT TAGS
+      fail: msg="You must run this playbook with tags! [present|absent]"
