@@ -20,7 +20,7 @@
         project_path: "{{ playbook_dir }}/gcp"
         state: present
         force_init: yes
-        variables:
+        variables: 
           gcp_id: "{{ gcp_project_id }}"
           gcp_credential: "{{ gcp_cred_path }}"
         backend_config:
