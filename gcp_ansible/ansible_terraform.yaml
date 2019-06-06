@@ -15,10 +15,10 @@
   tags: present
 
   tasks:
-    - name: PROVISION GCP INFRASTRUCTURE USING TERRAFORM
+    - name: PROVISION GCP COMPUTE USING TERRAFORM
       terraform:
         project_path: "{{ playbook_dir }}/gcp"
-        state: present
+        state: present  
         force_init: yes
         variables: 
           gcp_id: "{{ gcp_project_id }}"
@@ -33,6 +33,11 @@
 
     - debug:
         msg: "{{ output }}"
+      
+    - meta: refresh_inventory
+
+    - debug:
+        var: groups
 
 
 - name: TEARDOWN GCP INFRASTRUCTURE USING TERRAFORM
@@ -42,7 +47,7 @@
   tags: absent
 
   tasks:
-    - name: TEARDOWN GCP INFRASTRUCTURE USING TERRAFORM
+    - name: TEARDOWN GCP COMPUTE USING TERRAFORM
       terraform:
         project_path: "{{ playbook_dir }}/gcp"
         state: absent

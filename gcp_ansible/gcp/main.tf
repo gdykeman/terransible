@@ -11,7 +11,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "centos-cloud/centos-7"
     }
   }
 
@@ -20,6 +20,15 @@ resource "google_compute_instance" "vm_instance" {
     access_config = {
 
     }
+  }
+
+  labels {
+    tag = "ansible"
+
+  }
+
+  metadata {
+    image_os = "centos"
   }
 }
 resource "google_compute_network" "vpc_network" {
